@@ -1,0 +1,22 @@
+{%extends "master.html"%}
+
+{%block content%}
+<form method="post">
+    {%csrf_token%}
+<table class="table">
+  <tr><td>Enter Name on Card</td>
+        <td><input type="text" name="uname" required/></td></tr>
+        <tr><td>Card No.</td>
+            <td><input type="text" name="cardno" required/></td></tr>
+        <tr><td>CVV No.</td>
+                <td><input type="text" name="cvv" required/></td></tr>
+        <tr><td>Expiry On</td>
+                    <td><input type="text" name="expiry" placeholder="mm/yyyy" required/></td></tr>
+        <tr><td>Total Amount </td>
+        <td>{{request.session.total}}</td></tr>
+        <tr>
+            <td><button type="submit" class="button btn-success">Verify card Details</button></td>
+        </tr>
+</table>
+</form>
+{%endblock%}

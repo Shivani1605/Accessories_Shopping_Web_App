@@ -1,0 +1,20 @@
+{%extends "master.html"%} {%block content%}
+
+<center>
+    <h1>This is Alert Page</h1>
+</center>
+{%if messages %} {%for msg in messages%} {% if msg.tags == 'success'%}
+
+<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{msg.tags}}
+  </div>
+  {%else%}
+  <div class="alert alert-danger fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>{{msg}}
+  </div>
+   {%endif%}
+  {%endfor%}
+{%endif%}
+{%endblock%}

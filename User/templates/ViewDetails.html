@@ -1,0 +1,41 @@
+{%extends "master.html"%}
+
+{%block content%}
+<form method="post" action="/AddToCart">
+    {%csrf_token%}
+<table class="table">
+        <tr><td>Product Id</td>
+            <td>{{product.id}}
+                <input type="hidden" name="productid" value="{{product.id}}"/>   <!--with quantity we want id so we use hidden ip-->
+            </td>
+        </tr>
+        <tr><td>Product Name</td>
+            <td>{{product.product_name}}</td>
+        </tr>
+        <tr><td>Category</td>
+            <td>{{product.cat_id}}</td>
+        </tr>
+        <tr><td>Image</td>
+            <td>
+                <img src="{{product.imgurl.url}}" height="120" width="150"/>
+            </td>
+        </tr>
+                            
+        <tr>
+            <td>Quantity</td>
+            <td>
+                <select name="qty"><option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="button btn-success">Add To Cart</button>
+            </td>
+        </tr>
+</table>
+</form>
+{%endblock%}

@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Accessories</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        
+        .navbar {
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        /* Remove the jumbotron's default bottom margin */
+        
+        .jumbotron {
+            margin-bottom: 0;
+        }
+        /* Add a gray background color and some padding to the footer */
+        
+        footer {
+            background-color: #94c28e;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="jumbotron" style="background-color: rgb(209, 219, 224);">
+        <div class="container text-center">
+            <h1>Latest Accessories World</h1>
+            <!--<img src= "media\Images\download.png" height="150" width="800"/>  -->
+            <p>Fancy, Classi and Branded.</p>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+                <a class="navbar-brand" href="#">
+      {%if "uname" in request.session%}
+      Welcome {{request.session.uname}}
+      {%else%}
+      Accessories
+    {%endif%}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="dropdown">
+
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Catagories
+          <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {%for cat in cats%}
+
+                            <li>
+                                <a href="/ShowProduct/{{cat.id}}">{{cat.category_name}}</a>
+                            </li>
+
+                            <!--To see all cart item this url generated-->
+                            {%endfor%}
+                        </ul>
+                    </li>
+                    <li><a href="/alertPage">Alert</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {%if "uname" in request.session%}
+                    <li><a href="/Logout"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                    {%else%}
+                    <li><a href="/Login"><span class="glyphicon glyphicon-user"></span>Login</a></li>
+                    <li><a href="/SignUp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                    {%endif%}
+                    <li><a href="/ShowAllCartItems"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {%block content%}
+    <div class="container">
+        <div class="row">
+            {%for product in products%}
+            <!-- showing cake name and price and the footer of img-->
+            <div class="col-sm-4" style="background-color: rgb(252, 251, 249);">
+                <center>
+                    <div class="panel-heading" style="background-color:rgb(163, 219, 233);"><b>{{product.product_name}}</b></div>
+                </center>
+                <div class="panel-body">
+                    <div class="panel panel-primary">
+                        <center><img src="{{product.imgurl.url}}" height="100" width="100" /></center>
+                    </div>
+
+                    <div class="panel-footer" style="background-color: rgb(195, 236, 223);"><b>Price : {{product.price}}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/ViewDetails/{{product.id}}"><b>View Details</b></a>
+                    </div>
+
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div><br> {%endblock%}
+    <footer class="container-fluid text-center">
+        <p>Latest Accessori World Copyright</p>
+        <p>Thank you !!! </p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{%extends "master.html"%}
+{%block content%}
+
+<script type="text/javascript">  // Function to Increament and Dereament  the quantity  of product uding button
+function increment(val)
+{
+    var txtId = val;
+    var num = parseInt(document.getElementById(txtId).value);
+    if(num < 10)
+    {
+      num++;
+    }    
+    document.getElementById(txtId).value = num;
+}
+
+
+function decrement(val)
+{
+    var txtId = val;
+    var num = parseInt(document.getElementById(txtId).value);
+    if(num>1)
+    {
+      num--;
+    }
+    document.getElementById(txtId).value = num;    
+}
+</script>
+
+
+
+
+<table class="table">
+  <tr><th>Product id</th><th>Product Name</th><th>Price</th><th>  Quantity</th></tr>
+  {%for item in items%}
+  <form method="post">
+    {%csrf_token%}
+  <tr>
+    <td>{{item.Product.id}}
+      <input type="hidden" name="Product_id" value="{{item.Product.id}}"/>  <!-- hidden feild take becz id is in not text box so not stored in form-->
+    </td>
+    <td>{{item.Product.product_name}}</td>
+    <td>{{item.Product.price}}</td>
+    <td>
+      <button class="button btn-danger" type="button" onclick="decrement('qty{{item.Product.id}}');">  -  </button>
+      <input name="item_qty" type="text" id="qty{{item.Product.id}}" value="{{item.qty}}" size="2"/><!-- it is in text box it direct fetch in form feild-->
+      <button class="button btn-success" type="button" onclick="increment('qty{{item.Product.id}}');">  +  </button>
+    </td>
+
+    <td><button class="button btn-success" type="submit" name="action" value="Update">Update</button></td>
+    <td><button class="button btn-success" type="submit" name="action" value="Remove">Remove</button></td>
+  </tr>
+ </form>
+  {%endfor%}
+
+</table>
+<hr/>
+<h2>Total : {{request.session.total}}
+    <br/>
+  <center><a href="Makepayment">Proceed to Make Payment</a></center>
+</h2>
+</div>
+{%endblock%}
